@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cq47c4rcow286"]
+[gd_scene load_steps=12 format=3 uid="uid://cq47c4rcow286"]
 
 [ext_resource type="Script" uid="uid://cxfm54eriuwgv" path="res://area/slots/slots.gd" id="1_63hsx"]
 [ext_resource type="Texture2D" uid="uid://blwhwi1ptx2g8" path="res://resources/assets/IMG_3349.png" id="2_51noi"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://bv5qd47xnuq1r" path="res://area/slots/calculator.gd" id="5_51noi"]
 [ext_resource type="Resource" uid="uid://doye73yijtkm3" path="res://resources/data/tiles/spades.tres" id="5_331ki"]
 [ext_resource type="Resource" uid="uid://co8b54ewx3dw8" path="res://resources/data/tiles/diamonds.tres" id="6_58lkm"]
+[ext_resource type="Texture2D" uid="uid://ddaf03cgc0shy" path="res://resources/assets/freeze.png" id="11_mxkie"]
 
 [node name="Slots" type="Node2D"]
 script = ExtResource("1_63hsx")
@@ -36,4 +37,31 @@ spacing = Vector2(250, 200)
 sprite_texture = ExtResource("3_o7xn4")
 scaling = 0.4
 
+[node name="FreezeButtons" type="Node2D" parent="."]
+scale = Vector2(0.25, 0.25)
+
+[node name="Freeze1" type="Button" parent="FreezeButtons"]
+offset_left = 724.0
+offset_top = 1532.0
+offset_right = 1232.0
+offset_bottom = 2040.0
+icon = ExtResource("11_mxkie")
+
+[node name="Freeze2" type="Button" parent="FreezeButtons"]
+offset_left = -240.0
+offset_top = 1552.0
+offset_right = 268.0
+offset_bottom = 2060.0
+icon = ExtResource("11_mxkie")
+
+[node name="Freeze3" type="Button" parent="FreezeButtons"]
+offset_left = -1276.0
+offset_top = 1532.0
+offset_right = -768.0
+offset_bottom = 2040.0
+icon = ExtResource("11_mxkie")
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="FreezeButtons/Freeze1" to="." method="_on_freeze_1_pressed"]
+[connection signal="pressed" from="FreezeButtons/Freeze2" to="." method="_on_freeze_2_pressed"]
+[connection signal="pressed" from="FreezeButtons/Freeze3" to="." method="_on_freeze_3_pressed"]

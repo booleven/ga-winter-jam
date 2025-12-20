@@ -7,11 +7,14 @@ extends Node2D
 func _ready() -> void:
 	create_grid()
 
+# |0 3 6|
+# |1 4 7|
+# |2 5 8|
 func create_grid():
 	var index = 0
 	
-	for y in range(3): #row
-		for x in range(3): #col
+	for x in range(3): #col
+		for y in range(3): #row
 			var s = Sprite2D.new()
 			
 			s.name = str(index)
