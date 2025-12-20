@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://cq47c4rcow286"]
 
 [ext_resource type="Script" uid="uid://cxfm54eriuwgv" path="res://area/slots/slots.gd" id="1_63hsx"]
-[ext_resource type="Texture2D" uid="uid://blwhwi1ptx2g8" path="res://resources/assets/IMG_3349.png" id="2_51noi"]
+[ext_resource type="Texture2D" uid="uid://blwhwi1ptx2g8" path="res://resources/assets/background.png" id="2_51noi"]
 [ext_resource type="Script" uid="uid://be8tdlaws8mdc" path="res://scripts/tile.gd" id="2_xc0nf"]
 [ext_resource type="Resource" uid="uid://c3prb5dquie05" path="res://resources/data/tiles/clubs.tres" id="3_mxkie"]
 [ext_resource type="Texture2D" uid="uid://n3g06ljb3sk8" path="res://resources/assets/back.svg" id="3_o7xn4"]
