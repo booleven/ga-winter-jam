@@ -11,8 +11,16 @@ config_version=5
 [application]
 
 config/name="winter-jam"
+run/main_scene="uid://b3uw1nsf5iuha"
 config/features=PackedStringArray("4.5", "GL Compatibility")
-config/icon="res://back.svg"
+config/icon="res://resources/assets/back.svg"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/stretch/mode="canvas_items"
+window/stretch/aspect="ignore"
 
 [editor]
 

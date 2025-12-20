@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Tile" load_steps=5 format=3 uid="uid://durfc7kr4h720"]
+
+[ext_resource type="Script" uid="uid://c6xfokuc5imdg" path="res://scripts/effect.gd" id="1_0fcif"]
+[ext_resource type="Resource" uid="uid://dtjt2iw41b8n" path="res://resources/data/effects/basic.tres" id="2_c63nk"]
+[ext_resource type="Script" uid="uid://be8tdlaws8mdc" path="res://scripts/tile.gd" id="3_dx0gw"]
+[ext_resource type="Texture2D" uid="uid://i5gsnw6bwmnx" path="res://resources/assets/tiles/hearts.png" id="4_cauhi"]
+
+[resource]
+script = ExtResource("3_dx0gw")
+name = "hearts"
+texture = ExtResource("4_cauhi")
+cost = 1000
+effects = Array[ExtResource("1_0fcif")]([ExtResource("2_c63nk")])
+metadata/_custom_type_script = "uid://be8tdlaws8mdc"

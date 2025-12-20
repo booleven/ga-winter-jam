@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Effect" load_steps=2 format=3 uid="uid://dtjt2iw41b8n"]
+
+[ext_resource type="Script" uid="uid://c6xfokuc5imdg" path="res://scripts/effect.gd" id="1_s8570"]
+
+[resource]
+script = ExtResource("1_s8570")
+fx = "add_points"
+args = Array[int]([100])
+metadata/_custom_type_script = "uid://c6xfokuc5imdg"
