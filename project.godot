@@ -12,7 +12,7 @@ config_version=5
 
 config/name="winter-jam"
 config/features=PackedStringArray("4.5", "GL Compatibility")
-config/icon="res://me.svg"
+config/icon="res://back.svg"
 
 [editor]
 
