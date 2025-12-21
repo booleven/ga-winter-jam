@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cq47c4rcow286"]
+[gd_scene load_steps=13 format=3 uid="uid://cq47c4rcow286"]
 
 [ext_resource type="Script" uid="uid://cxfm54eriuwgv" path="res://area/slots/slots.gd" id="1_63hsx"]
 [ext_resource type="Texture2D" uid="uid://blwhwi1ptx2g8" path="res://resources/assets/background.png" id="2_51noi"]
@@ -12,15 +12,27 @@
 [ext_resource type="Resource" uid="uid://co8b54ewx3dw8" path="res://resources/data/tiles/diamonds.tres" id="6_58lkm"]
 [ext_resource type="Texture2D" uid="uid://ddaf03cgc0shy" path="res://resources/assets/freeze.png" id="11_mxkie"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_mxkie"]
+font_size = 50
+
 [node name="Slots" type="Node2D"]
 script = ExtResource("1_63hsx")
 total_tiles = Array[ExtResource("2_xc0nf")]([ExtResource("3_mxkie"), ExtResource("3_mxkie"), ExtResource("3_mxkie"), ExtResource("3_mxkie"), ExtResource("4_5gn18"), ExtResource("4_5gn18"), ExtResource("4_5gn18"), ExtResource("4_5gn18"), ExtResource("5_331ki"), ExtResource("5_331ki"), ExtResource("5_331ki"), ExtResource("5_331ki"), ExtResource("6_58lkm"), ExtResource("6_58lkm"), ExtResource("6_58lkm"), ExtResource("6_58lkm")])
 
-[node name="Calculator" type="Node" parent="."]
-script = ExtResource("5_51noi")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_51noi")
+
+[node name="Grid" type="Node2D" parent="."]
+position = Vector2(-250, -125)
+script = ExtResource("4_8wavt")
+spacing = Vector2(250, 200)
+sprite_texture = ExtResource("3_o7xn4")
+scaling = 0.8
+wrap_materials = Array[ShaderMaterial]([null])
+
+[node name="Calculator" type="Node" parent="."]
+script = ExtResource("5_51noi")
+timer = 0.7
 
 [node name="Button" type="Button" parent="."]
 offset_left = 449.0
@@ -29,13 +41,6 @@ offset_right = 702.0
 offset_bottom = -226.0
 text = "fart poopy fart"
 icon = ExtResource("3_o7xn4")
-
-[node name="Grid" type="Node2D" parent="."]
-position = Vector2(-250, -125)
-script = ExtResource("4_8wavt")
-spacing = Vector2(250, 200)
-sprite_texture = ExtResource("3_o7xn4")
-scaling = 0.4
 
 [node name="FreezeButtons" type="Node2D" parent="."]
 scale = Vector2(0.25, 0.25)
@@ -60,6 +65,14 @@ offset_top = 1532.0
 offset_right = -768.0
 offset_bottom = 2040.0
 icon = ExtResource("11_mxkie")
+
+[node name="Counter" type="Label" parent="."]
+offset_left = -30.0
+offset_top = -342.0
+offset_right = 41.0
+offset_bottom = -273.0
+text = "1.0	"
+label_settings = SubResource("LabelSettings_mxkie")
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="FreezeButtons/Freeze1" to="." method="_on_freeze_1_pressed"]

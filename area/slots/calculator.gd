@@ -1,5 +1,9 @@
 extends Node
 
+@export var timer := 1.0
+var points := 0
+
+#takes in the 9 tiles on grid to process
 func stack(tiles: Array[Tile]) -> void:
 	var flat: Array[QueuedEffect] = []
 	var order := 0
@@ -25,6 +29,7 @@ func stack(tiles: Array[Tile]) -> void:
 
 	#do until empty
 	while effect_queue.size() > 0:
+		await get_tree().create_timer(timer).timeout
 		var qe := effect_queue.pop_front() as QueuedEffect #explicity put this for no error
 		calculate(qe)
 
@@ -48,16 +53,15 @@ func calculate(qe: QueuedEffect) -> void:
 	if not has_method(qe.fx):
 		push_error("Invalid effect method: %s" % qe.fx)
 		return
-
-	call(qe.fx, qe.arg)
-
+	
+	#hardcoded
+	var grid := get_node("../Grid")
+	grid.tiles[qe.tile_index].animate("score") #idle, score, freeze
+	call(qe.fx, qe.arg) #this is actually calculating
+	var counter := get_node("../Counter")
+	counter.text = str(points)
 
 #actual effects
 func add_points(amount: int):
-	return
-
-func multiply_points(multiplier: int):
-	return
-
-func add_spins(amount: int):
+	points += amount
 	return
