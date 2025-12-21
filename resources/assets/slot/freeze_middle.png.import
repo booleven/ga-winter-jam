@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://n3g06ljb3sk8"
-path="res://.godot/imported/back.svg-ea8183ae332e2ad69456810a1a1b1f0c.ctex"
+uid="uid://ba3x81lyvt8ns"
+path="res://.godot/imported/freeze_middle.png-45632c65c8dbad0d85a24c3cfd691f26.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/assets/back.svg"
-dest_files=["res://.godot/imported/back.svg-ea8183ae332e2ad69456810a1a1b1f0c.ctex"]
+source_file="res://resources/assets/slot/freeze_middle.png"
+dest_files=["res://.godot/imported/freeze_middle.png-45632c65c8dbad0d85a24c3cfd691f26.ctex"]
 
 [params]
 
@@ -38,6 +38,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

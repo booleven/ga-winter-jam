@@ -1,16 +1,44 @@
-[gd_scene load_steps=13 format=3 uid="uid://cq47c4rcow286"]
+[gd_scene load_steps=24 format=3 uid="uid://cq47c4rcow286"]
 
 [ext_resource type="Script" uid="uid://cxfm54eriuwgv" path="res://area/slots/slots.gd" id="1_63hsx"]
-[ext_resource type="Texture2D" uid="uid://blwhwi1ptx2g8" path="res://resources/assets/background.png" id="2_51noi"]
 [ext_resource type="Script" uid="uid://be8tdlaws8mdc" path="res://scripts/tile.gd" id="2_xc0nf"]
 [ext_resource type="Resource" uid="uid://c3prb5dquie05" path="res://resources/data/tiles/clubs.tres" id="3_mxkie"]
-[ext_resource type="Texture2D" uid="uid://n3g06ljb3sk8" path="res://resources/assets/back.svg" id="3_o7xn4"]
 [ext_resource type="Resource" uid="uid://durfc7kr4h720" path="res://resources/data/tiles/hearts.tres" id="4_5gn18"]
 [ext_resource type="Script" uid="uid://5lqmbbfg0ywq" path="res://area/slots/grid.gd" id="4_8wavt"]
 [ext_resource type="Script" uid="uid://bv5qd47xnuq1r" path="res://area/slots/calculator.gd" id="5_51noi"]
 [ext_resource type="Resource" uid="uid://doye73yijtkm3" path="res://resources/data/tiles/spades.tres" id="5_331ki"]
 [ext_resource type="Resource" uid="uid://co8b54ewx3dw8" path="res://resources/data/tiles/diamonds.tres" id="6_58lkm"]
-[ext_resource type="Texture2D" uid="uid://ddaf03cgc0shy" path="res://resources/assets/freeze.png" id="11_mxkie"]
+[ext_resource type="Material" uid="uid://bmv3x3qqnsqmr" path="res://area/slots/freeze.tres" id="7_hg167"]
+[ext_resource type="Texture2D" uid="uid://7d2wb1b1v0fc" path="res://resources/assets/slot/slot_machine.png" id="7_mxkie"]
+[ext_resource type="Texture2D" uid="uid://bfn74bl6lpbk1" path="res://resources/assets/slot/slot_grid.png" id="8_v37ui"]
+[ext_resource type="Texture2D" uid="uid://do72usrclfgbr" path="res://resources/assets/slot/lever_shaft.png" id="9_v37ui"]
+[ext_resource type="Shader" uid="uid://dc1iecysx73tm" path="res://resources/shaders/clip.gdshader" id="9_xpi8b"]
+[ext_resource type="Script" uid="uid://4jnese2il8fy" path="res://area/slots/lever.gd" id="10_xus7s"]
+[ext_resource type="Texture2D" uid="uid://lnjcd8sclpku" path="res://resources/assets/slot/lever_handle.png" id="11_hg167"]
+[ext_resource type="Shader" uid="uid://cspqy8k7toorr" path="res://resources/shaders/barrel.gdshader" id="15_75l62"]
+[ext_resource type="Texture2D" uid="uid://bsn2oyd7vflfi" path="res://resources/assets/slot/freeze_left.png" id="16_xus7s"]
+[ext_resource type="Texture2D" uid="uid://ba3x81lyvt8ns" path="res://resources/assets/slot/freeze_middle.png" id="17_hg167"]
+[ext_resource type="Texture2D" uid="uid://dvten5ft4mdw0" path="res://resources/assets/slot/freeze_right.png" id="18_75l62"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xpi8b"]
+shader = ExtResource("9_xpi8b")
+shader_parameter/power = 1000.0
+shader_parameter/up = 0.0
+shader_parameter/down = 0.0
+shader_parameter/left = 0.0
+shader_parameter/right = 0.0
+shader_parameter/up_clip = 0.0
+shader_parameter/down_clip = 0.0
+shader_parameter/left_clip = 0.0
+shader_parameter/right_clip = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_75l62"]
+radius = 136.00368
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0rqpl"]
+shader = ExtResource("15_75l62")
+shader_parameter/distortion_strength = 2.0
+shader_parameter/curvature = 2.0000000475
 
 [sub_resource type="LabelSettings" id="LabelSettings_mxkie"]
 font_size = 50
@@ -18,63 +46,82 @@ font_size = 50
 [node name="Slots" type="Node2D"]
 script = ExtResource("1_63hsx")
 total_tiles = Array[ExtResource("2_xc0nf")]([ExtResource("3_mxkie"), ExtResource("3_mxkie"), ExtResource("3_mxkie"), ExtResource("3_mxkie"), ExtResource("4_5gn18"), ExtResource("4_5gn18"), ExtResource("4_5gn18"), ExtResource("4_5gn18"), ExtResource("5_331ki"), ExtResource("5_331ki"), ExtResource("5_331ki"), ExtResource("5_331ki"), ExtResource("6_58lkm"), ExtResource("6_58lkm"), ExtResource("6_58lkm"), ExtResource("6_58lkm")])
+freeze_material = ExtResource("7_hg167")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_51noi")
+[node name="SlotMachine" type="Sprite2D" parent="."]
+position = Vector2(0, 52)
+texture = ExtResource("7_mxkie")
 
-[node name="Grid" type="Node2D" parent="."]
-position = Vector2(-250, -125)
+[node name="SlotGrid" type="Sprite2D" parent="."]
+position = Vector2(-10, 89)
+texture = ExtResource("8_v37ui")
+
+[node name="LeverShaft" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_xpi8b")
+position = Vector2(552, 184)
+texture = ExtResource("9_v37ui")
+
+[node name="Lever" type="Area2D" parent="." node_paths=PackedStringArray("shaft")]
+position = Vector2(568, -108)
+script = ExtResource("10_xus7s")
+max_pull_distance = 350.0
+activation_threshold = 0.9
+shaft = NodePath("../LeverShaft")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lever"]
+shape = SubResource("CircleShape2D_75l62")
+
+[node name="LeverHandle" type="Sprite2D" parent="Lever"]
+texture = ExtResource("11_hg167")
+
+[node name="Grid" type="CanvasGroup" parent="."]
+position = Vector2(-260, -126)
 script = ExtResource("4_8wavt")
 spacing = Vector2(250, 200)
-sprite_texture = ExtResource("3_o7xn4")
-scaling = 0.8
-wrap_materials = Array[ShaderMaterial]([null])
+scaling = 0.7
+barrel = SubResource("ShaderMaterial_0rqpl")
 
 [node name="Calculator" type="Node" parent="."]
 script = ExtResource("5_51noi")
 timer = 0.7
 
-[node name="Button" type="Button" parent="."]
-offset_left = 449.0
-offset_top = -362.0
-offset_right = 702.0
-offset_bottom = -226.0
-text = "fart poopy fart"
-icon = ExtResource("3_o7xn4")
-
 [node name="FreezeButtons" type="Node2D" parent="."]
-scale = Vector2(0.25, 0.25)
+position = Vector2(0, 52)
 
-[node name="Freeze1" type="Button" parent="FreezeButtons"]
-offset_left = 724.0
-offset_top = 1532.0
-offset_right = 1232.0
-offset_bottom = 2040.0
-icon = ExtResource("11_mxkie")
+[node name="Freeze1" type="TextureButton" parent="FreezeButtons"]
+offset_left = -313.0
+offset_top = 354.0
+offset_right = -163.0
+offset_bottom = 454.0
+texture_normal = ExtResource("16_xus7s")
+metadata/_edit_use_anchors_ = true
 
-[node name="Freeze2" type="Button" parent="FreezeButtons"]
-offset_left = -240.0
-offset_top = 1552.0
-offset_right = 268.0
-offset_bottom = 2060.0
-icon = ExtResource("11_mxkie")
+[node name="Freeze2" type="TextureButton" parent="FreezeButtons"]
+offset_left = -80.0
+offset_top = 362.0
+offset_right = 70.0
+offset_bottom = 462.0
+texture_normal = ExtResource("17_hg167")
+metadata/_edit_use_anchors_ = true
 
-[node name="Freeze3" type="Button" parent="FreezeButtons"]
-offset_left = -1276.0
-offset_top = 1532.0
-offset_right = -768.0
-offset_bottom = 2040.0
-icon = ExtResource("11_mxkie")
+[node name="Freeze3" type="TextureButton" parent="FreezeButtons"]
+offset_left = 147.0
+offset_top = 356.0
+offset_right = 297.0
+offset_bottom = 456.0
+texture_normal = ExtResource("18_75l62")
+metadata/_edit_use_anchors_ = true
 
 [node name="Counter" type="Label" parent="."]
-offset_left = -30.0
-offset_top = -342.0
-offset_right = 41.0
-offset_bottom = -273.0
+offset_left = -43.0
+offset_top = -340.0
+offset_right = 28.0
+offset_bottom = -271.0
 text = "1.0	"
 label_settings = SubResource("LabelSettings_mxkie")
+metadata/_edit_use_anchors_ = true
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pulled" from="Lever" to="." method="_on_lever_pulled"]
 [connection signal="pressed" from="FreezeButtons/Freeze1" to="." method="_on_freeze_1_pressed"]
 [connection signal="pressed" from="FreezeButtons/Freeze2" to="." method="_on_freeze_2_pressed"]
 [connection signal="pressed" from="FreezeButtons/Freeze3" to="." method="_on_freeze_3_pressed"]

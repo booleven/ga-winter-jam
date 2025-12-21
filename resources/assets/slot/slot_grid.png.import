@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddaf03cgc0shy"
-path="res://.godot/imported/freeze.png-ec083af1461b6878a75339ca94100ae5.ctex"
+uid="uid://bfn74bl6lpbk1"
+path="res://.godot/imported/slot_grid.png-24a566506a3ffac27a4979e6b79d4299.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/assets/freeze.png"
-dest_files=["res://.godot/imported/freeze.png-ec083af1461b6878a75339ca94100ae5.ctex"]
+source_file="res://resources/assets/slot/slot_grid.png"
+dest_files=["res://.godot/imported/slot_grid.png-24a566506a3ffac27a4979e6b79d4299.ctex"]
 
 [params]
 

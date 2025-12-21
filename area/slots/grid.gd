@@ -1,15 +1,18 @@
-extends Node2D
+extends CanvasGroup
 
 @export var spacing: Vector2 = Vector2(250, 250)
 @export var sprite_texture: Texture2D
 @export var scaling: float = 1.0
 var tiles: Array[TileDisplay] = []
 
-@export var wrap_materials: Array[ShaderMaterial] = []
+@export var barrel: ShaderMaterial
 
 func _ready() -> void:
 	create_grid()
-	tiles[0].material = wrap_materials[0]
+	#hardcoded but so reasonable
+	barrel.set_shader_parameter("distortion_strength", 2)
+	barrel.set_shader_parameter("curvature", 2)
+	tiles[0].material = barrel.duplicate()
 
 # |0 3 6|
 # |1 4 7|

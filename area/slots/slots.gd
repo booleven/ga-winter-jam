@@ -2,6 +2,7 @@ extends Node2D
 class_name Slot
 
 @export var total_tiles: Array[Tile] = []
+@export var freeze_material: CanvasItemMaterial
 var current_tiles: Array[Tile] = []
 var points: int
 const COLUMNS := [
@@ -62,15 +63,32 @@ func update_visuals():
 		else:
 			tile_display.sprite.texture = tile.texture
 
-#upvote button
-func _on_button_pressed() -> void:
-	new_spin()
-
+#downvote button
 func _on_freeze_1_pressed():
-	frozen[2] = !frozen[2]
+	var b := get_node("FreezeButtons/Freeze1") as TextureButton
+	if frozen[0] == false:
+		b.material = freeze_material
+	else:
+		b.material = null
+	frozen[0] = !frozen[0]
 
 func _on_freeze_2_pressed() -> void:
+	var b := get_node("FreezeButtons/Freeze2") as TextureButton
+	if frozen[1] == false:
+		b.material = freeze_material
+	else:
+		b.material = null
 	frozen[1] = !frozen[1]
 
 func _on_freeze_3_pressed() -> void:
-	frozen[0] = !frozen[0]
+	var b := get_node("FreezeButtons/Freeze3") as TextureButton
+	if frozen[2] == false:
+		b.material = freeze_material
+	else:
+		b.material = null
+	frozen[2] = !frozen[2]
+
+#upvote button
+func _on_lever_pulled() -> void:
+	await get_tree().create_timer(1.5).timeout #this would be spin animation time
+	new_spin()

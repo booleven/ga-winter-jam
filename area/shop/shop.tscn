@@ -1,12 +1,3 @@
-[gd_scene load_steps=2 format=3 uid="uid://cjon5h6roosix"]
-
-[ext_resource type="Texture2D" uid="uid://n3g06ljb3sk8" path="res://resources/assets/back.svg" id="1_pk11y"]
+[gd_scene format=3 uid="uid://cjon5h6roosix"]
 
 [node name="Shop" type="Node2D"]
-
-[node name="Button" type="Button" parent="."]
-offset_left = 109.0
-offset_top = -1.0
-offset_right = 245.0
-offset_bottom = 135.0
-icon = ExtResource("1_pk11y")
