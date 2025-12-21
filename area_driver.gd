@@ -2,11 +2,10 @@ extends Node2D
 
 @onready var area_container = $Node2D
 var current_area: Node = null
-var level: int = 0
-var money: int = 1000
 
 func _ready() -> void:
 	load_area("res://area/slots/slots.tscn")
+	#load_area("res://area/shop/shop.tscn")
 
 func load_area(scene_path: String):
 	if current_area:
