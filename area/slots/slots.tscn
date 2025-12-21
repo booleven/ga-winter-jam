@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cq47c4rcow286"]
+[gd_scene load_steps=27 format=3 uid="uid://cq47c4rcow286"]
 
 [ext_resource type="Script" uid="uid://cxfm54eriuwgv" path="res://area/slots/slots.gd" id="1_63hsx"]
 [ext_resource type="Script" uid="uid://be8tdlaws8mdc" path="res://scripts/tile.gd" id="2_xc0nf"]
@@ -10,6 +10,7 @@
 [ext_resource type="Resource" uid="uid://co8b54ewx3dw8" path="res://resources/data/tiles/diamonds.tres" id="6_58lkm"]
 [ext_resource type="Material" uid="uid://bmv3x3qqnsqmr" path="res://area/slots/freeze.tres" id="7_hg167"]
 [ext_resource type="Texture2D" uid="uid://7d2wb1b1v0fc" path="res://resources/assets/slot/slot_machine.png" id="7_mxkie"]
+[ext_resource type="Texture2D" uid="uid://d3xfrnwd55810" path="res://resources/assets/slot/background.png" id="8_3q2qy"]
 [ext_resource type="Texture2D" uid="uid://bfn74bl6lpbk1" path="res://resources/assets/slot/slot_grid.png" id="8_v37ui"]
 [ext_resource type="Texture2D" uid="uid://do72usrclfgbr" path="res://resources/assets/slot/lever_shaft.png" id="9_v37ui"]
 [ext_resource type="Shader" uid="uid://dc1iecysx73tm" path="res://resources/shaders/clip.gdshader" id="9_xpi8b"]
@@ -19,6 +20,23 @@
 [ext_resource type="Texture2D" uid="uid://bsn2oyd7vflfi" path="res://resources/assets/slot/freeze_left.png" id="16_xus7s"]
 [ext_resource type="Texture2D" uid="uid://ba3x81lyvt8ns" path="res://resources/assets/slot/freeze_middle.png" id="17_hg167"]
 [ext_resource type="Texture2D" uid="uid://dvten5ft4mdw0" path="res://resources/assets/slot/freeze_right.png" id="18_75l62"]
+[ext_resource type="Shader" uid="uid://bc0ku5feafpuy" path="res://resources/shaders/led.gdshader" id="20_2et7l"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2et7l"]
+shader = ExtResource("20_2et7l")
+shader_parameter/grid_columns = 80
+shader_parameter/grid_rows = 80
+shader_parameter/led_brightness = 1.0
+shader_parameter/led_radius = 0.80000001192093
+shader_parameter/glow_size = 0.3
+shader_parameter/glow_strength = 0.5
+shader_parameter/color_quantization = 0.0
+shader_parameter/background_color = Color(0.13725491, 0.21960784, 0.2901961, 1)
+shader_parameter/background_opacity = 1.0
+shader_parameter/glow_pulse = 0.10000000475
+shader_parameter/curvature = 0.05
+shader_parameter/enable_dither = true
+shader_parameter/enable_flicker = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xpi8b"]
 shader = ExtResource("9_xpi8b")
@@ -41,12 +59,39 @@ shader_parameter/distortion_strength = 2.0
 shader_parameter/curvature = 2.0000000475
 
 [sub_resource type="LabelSettings" id="LabelSettings_mxkie"]
-font_size = 50
+font_size = 100
 
 [node name="Slots" type="Node2D"]
 script = ExtResource("1_63hsx")
 total_tiles = Array[ExtResource("2_xc0nf")]([ExtResource("3_mxkie"), ExtResource("3_mxkie"), ExtResource("3_mxkie"), ExtResource("3_mxkie"), ExtResource("4_5gn18"), ExtResource("4_5gn18"), ExtResource("4_5gn18"), ExtResource("4_5gn18"), ExtResource("5_331ki"), ExtResource("5_331ki"), ExtResource("5_331ki"), ExtResource("5_331ki"), ExtResource("6_58lkm"), ExtResource("6_58lkm"), ExtResource("6_58lkm"), ExtResource("6_58lkm")])
 freeze_material = ExtResource("7_hg167")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("8_3q2qy")
+
+[node name="LEDBackground" type="ColorRect" parent="."]
+offset_left = -293.0
+offset_top = -548.0
+offset_right = 292.0
+offset_bottom = 37.0
+color = Color(0.18039216, 0.28627452, 0.3764706, 1)
+
+[node name="PointsCounter" type="Label" parent="."]
+offset_left = -227.0
+offset_top = -374.0
+offset_right = 214.0
+offset_bottom = -237.0
+theme_override_colors/font_color = Color(0.913602, 0.36528543, 0.5094912, 1)
+theme_override_font_sizes/font_size = 100
+text = "0"
+horizontal_alignment = 1
+
+[node name="LEDs" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_2et7l")
+offset_left = -471.0
+offset_top = -683.0
+offset_right = 413.0
+offset_bottom = 201.0
 
 [node name="SlotMachine" type="Sprite2D" parent="."]
 position = Vector2(0, 52)
@@ -112,12 +157,12 @@ offset_bottom = 456.0
 texture_normal = ExtResource("18_75l62")
 metadata/_edit_use_anchors_ = true
 
-[node name="Counter" type="Label" parent="."]
-offset_left = -43.0
-offset_top = -340.0
-offset_right = 28.0
-offset_bottom = -271.0
-text = "1.0	"
+[node name="SpinsCounter" type="Label" parent="."]
+offset_left = -620.0
+offset_top = -85.0
+offset_right = -506.0
+offset_bottom = 56.0
+text = "3"
 label_settings = SubResource("LabelSettings_mxkie")
 metadata/_edit_use_anchors_ = true
 

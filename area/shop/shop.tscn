@@ -1,3 +1,43 @@
-[gd_scene format=3 uid="uid://cjon5h6roosix"]
+[gd_scene load_steps=7 format=3 uid="uid://cjon5h6roosix"]
+
+[ext_resource type="Script" uid="uid://r2ejew3lwndl" path="res://area/shop/shop.gd" id="1_uwyyb"]
+[ext_resource type="Texture2D" uid="uid://3n8k42u7ojmn" path="res://resources/assets/shop/background.png" id="1_yhtqs"]
+[ext_resource type="Texture2D" uid="uid://df5wk47gyi372" path="res://resources/assets/shop/duffel_closed.png" id="2_uwyyb"]
+[ext_resource type="Texture2D" uid="uid://gdsqb5fxiq0m" path="res://resources/assets/shop/zipper.png" id="3_2g6jd"]
+[ext_resource type="Texture2D" uid="uid://d4c4ug8s65ixt" path="res://resources/assets/shop/topdown_machine.png" id="4_fmp5l"]
+[ext_resource type="Texture2D" uid="uid://ctejey16aulrt" path="res://resources/assets/shop/wrench.png" id="5_n4po3"]
 
 [node name="Shop" type="Node2D"]
+script = ExtResource("1_uwyyb")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("1_yhtqs")
+
+[node name="Dufflebag" type="Sprite2D" parent="."]
+position = Vector2(-555, 150)
+texture = ExtResource("2_uwyyb")
+
+[node name="Zipper" type="TextureButton" parent="."]
+offset_left = -720.00006
+offset_top = 254.00003
+offset_right = -590.00006
+offset_bottom = 450.00003
+rotation = 0.24329165
+texture_normal = ExtResource("3_2g6jd")
+metadata/_edit_use_anchors_ = true
+
+[node name="SlotMachine" type="Sprite2D" parent="."]
+position = Vector2(265, 36)
+texture = ExtResource("4_fmp5l")
+
+[node name="Wrench" type="TextureButton" parent="."]
+offset_left = 392.99997
+offset_top = -349.0
+offset_right = 678.0
+offset_bottom = 592.0
+rotation = -0.84433466
+texture_normal = ExtResource("5_n4po3")
+
+[connection signal="focus_entered" from="Zipper" to="." method="_on_zipper_focus_entered"]
+[connection signal="focus_exited" from="Zipper" to="." method="_on_zipper_focus_exited"]
+[connection signal="pressed" from="Zipper" to="." method="_on_zipper_pressed"]

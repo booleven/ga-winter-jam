@@ -3,6 +3,7 @@ extends Node2D
 @onready var area_container = $Node2D
 var current_area: Node = null
 var level: int = 0
+var money: int = 1000
 
 func _ready() -> void:
 	load_area("res://area/slots/slots.tscn")
