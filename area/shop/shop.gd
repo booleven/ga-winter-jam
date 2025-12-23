@@ -60,7 +60,7 @@ func _on_zipper_mouse_exited() -> void:
 	zipper.material = null
 
 func _on_wrench_pressed() -> void:
-	pass 
+	global.go_slots.emit()
 
 func _on_wrench_mouse_entered() -> void:
 	var wrench = get_node("Wrench") as TextureButton

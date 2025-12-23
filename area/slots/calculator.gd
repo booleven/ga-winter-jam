@@ -60,8 +60,7 @@ func queue(tiles: Array[Tile]) -> void:
 	
 	#postcalculate
 	if get_parent().spins == 0:
-		#go to shop
-		return
+		global.go_shop.emit()
 
 # Helper function to check if a pattern matches for a given tile
 func check_pattern(tiles: Array[Tile], pattern: Array, tile: Tile) -> bool:

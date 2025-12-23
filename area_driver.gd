@@ -5,7 +5,8 @@ var current_area: Node = null
 
 func _ready() -> void:
 	load_area("res://area/slots/slots.tscn")
-	#load_area("res://area/shop/shop.tscn")
+	global.go_shop.connect(on_go_shop_triggered)
+	global.go_slots.connect(on_go_slots_triggered)
 
 func load_area(scene_path: String):
 	if current_area:
@@ -14,3 +15,9 @@ func load_area(scene_path: String):
 	var area_scene = load(scene_path)
 	current_area = area_scene.instantiate()
 	area_container.add_child(current_area)
+
+func on_go_shop_triggered():
+	load_area("res://area/shop/shop.tscn")
+
+func on_go_slots_triggered():
+	load_area("res://area/slots/slots.tscn")

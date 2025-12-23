@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cq47c4rcow286"]
+[gd_scene load_steps=28 format=3 uid="uid://cq47c4rcow286"]
 
 [ext_resource type="Script" uid="uid://cxfm54eriuwgv" path="res://area/slots/slots.gd" id="1_63hsx"]
 [ext_resource type="Script" uid="uid://be8tdlaws8mdc" path="res://scripts/tile.gd" id="2_xc0nf"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://7d2wb1b1v0fc" path="res://resources/assets/slot/slot_machine.png" id="7_mxkie"]
 [ext_resource type="Texture2D" uid="uid://d3xfrnwd55810" path="res://resources/assets/slot/background.png" id="8_3q2qy"]
 [ext_resource type="Texture2D" uid="uid://bfn74bl6lpbk1" path="res://resources/assets/slot/slot_grid.png" id="8_v37ui"]
+[ext_resource type="Script" uid="uid://ce2qpf48t48tx" path="res://scripts/color_shape.gd" id="9_0rqpl"]
 [ext_resource type="Texture2D" uid="uid://do72usrclfgbr" path="res://resources/assets/slot/lever_shaft.png" id="9_v37ui"]
 [ext_resource type="Shader" uid="uid://dc1iecysx73tm" path="res://resources/shaders/clip.gdshader" id="9_xpi8b"]
 [ext_resource type="Script" uid="uid://4jnese2il8fy" path="res://area/slots/lever.gd" id="10_xus7s"]
@@ -22,18 +23,18 @@
 [ext_resource type="Texture2D" uid="uid://dvten5ft4mdw0" path="res://resources/assets/slot/freeze_right.png" id="18_75l62"]
 [ext_resource type="Shader" uid="uid://bc0ku5feafpuy" path="res://resources/shaders/led.gdshader" id="20_2et7l"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2et7l"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ha2tw"]
 shader = ExtResource("20_2et7l")
-shader_parameter/grid_columns = 80
-shader_parameter/grid_rows = 80
+shader_parameter/grid_columns = 75
+shader_parameter/grid_rows = 75
 shader_parameter/led_brightness = 1.0
 shader_parameter/led_radius = 0.80000001192093
-shader_parameter/glow_size = 0.3
+shader_parameter/glow_size = 0.0
 shader_parameter/glow_strength = 0.5
 shader_parameter/color_quantization = 0.0
 shader_parameter/background_color = Color(0.13725491, 0.21960784, 0.2901961, 1)
-shader_parameter/background_opacity = 1.0
-shader_parameter/glow_pulse = 0.10000000475
+shader_parameter/background_opacity = 0.90000004275
+shader_parameter/glow_pulse = 1.0
 shader_parameter/curvature = 0.05
 shader_parameter/enable_dither = true
 shader_parameter/enable_flicker = true
@@ -68,13 +69,26 @@ freeze_material = ExtResource("7_hg167")
 
 [node name="Background" type="Sprite2D" parent="."]
 texture = ExtResource("8_3q2qy")
+metadata/_edit_lock_ = true
 
-[node name="LEDBackground" type="ColorRect" parent="."]
-offset_left = -293.0
-offset_top = -548.0
-offset_right = 292.0
-offset_bottom = 37.0
+[node name="LEDBackgrouund" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -368.20807
+offset_top = -429.0
+offset_right = 364.0
+offset_bottom = 249.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+script = ExtResource("9_0rqpl")
+shape = 1
 color = Color(0.18039216, 0.28627452, 0.3764706, 1)
+metadata/_custom_type_script = "uid://ce2qpf48t48tx"
 
 [node name="PointsCounter" type="Label" parent="."]
 offset_left = -227.0
@@ -86,15 +100,27 @@ theme_override_font_sizes/font_size = 100
 text = "0"
 horizontal_alignment = 1
 
-[node name="LEDs" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_2et7l")
-offset_left = -471.0
-offset_top = -683.0
-offset_right = 413.0
-offset_bottom = 201.0
+[node name="LEDShader" type="Control" parent="."]
+material = SubResource("ShaderMaterial_ha2tw")
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -331.0
+offset_top = -429.0
+offset_right = 331.0
+offset_bottom = 213.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+script = ExtResource("9_0rqpl")
+shape = 1
+metadata/_custom_type_script = "uid://ce2qpf48t48tx"
 
 [node name="SlotMachine" type="Sprite2D" parent="."]
-position = Vector2(0, 52)
+position = Vector2(10, 52)
 texture = ExtResource("7_mxkie")
 
 [node name="SlotGrid" type="Sprite2D" parent="."]
@@ -103,11 +129,11 @@ texture = ExtResource("8_v37ui")
 
 [node name="LeverShaft" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_xpi8b")
-position = Vector2(552, 184)
+position = Vector2(563, 184)
 texture = ExtResource("9_v37ui")
 
 [node name="Lever" type="Area2D" parent="." node_paths=PackedStringArray("shaft")]
-position = Vector2(568, -108)
+position = Vector2(579, -108)
 script = ExtResource("10_xus7s")
 max_pull_distance = 350.0
 activation_threshold = 0.9
@@ -120,7 +146,7 @@ shape = SubResource("CircleShape2D_75l62")
 texture = ExtResource("11_hg167")
 
 [node name="Grid" type="CanvasGroup" parent="."]
-position = Vector2(-260, -126)
+position = Vector2(-249, -126)
 script = ExtResource("4_8wavt")
 spacing = Vector2(250, 200)
 scaling = 0.7
@@ -131,7 +157,7 @@ script = ExtResource("5_51noi")
 timer = 0.7
 
 [node name="FreezeButtons" type="Node2D" parent="."]
-position = Vector2(0, 52)
+position = Vector2(11, 52)
 
 [node name="Freeze1" type="TextureButton" parent="FreezeButtons"]
 offset_left = -313.0
@@ -158,9 +184,9 @@ texture_normal = ExtResource("18_75l62")
 metadata/_edit_use_anchors_ = true
 
 [node name="SpinsCounter" type="Label" parent="."]
-offset_left = -620.0
+offset_left = -609.0
 offset_top = -85.0
-offset_right = -506.0
+offset_right = -495.0
 offset_bottom = 56.0
 text = "3"
 label_settings = SubResource("LabelSettings_mxkie")

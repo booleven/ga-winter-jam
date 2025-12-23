@@ -3,7 +3,7 @@ class_name Slot
 
 @export var total_tiles: Array[Tile] = []
 @export var freeze_material: CanvasItemMaterial
-var spins: int = 3
+var spins: int = 5
 var current_tiles: Array[Tile] = []
 const COLUMNS := [
 	[0, 1, 2],
@@ -94,5 +94,7 @@ func _on_lever_pulled() -> void:
 	#some animation for three lights here pls!!!
 	var spins_counter := get_node("SpinsCounter")
 	spins_counter.text = str(spins)
-	await get_tree().create_timer(1.5).timeout #this would be spin animation time
-	new_spin()
+	await get_tree().create_timer(1.5).timeout
+	if spins == 0 or frozen == [true, true, true]:
+		new_spin()
+	#new_spin()
