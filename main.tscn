@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b3uw1nsf5iuha"]
 
-[ext_resource type="Script" uid="uid://bmb7ii5o2qmhl" path="res://area_driver.gd" id="1_mahr4"]
+[ext_resource type="Script" uid="uid://bmb7ii5o2qmhl" path="res://main.gd" id="1_mahr4"]
 [ext_resource type="AudioStream" uid="uid://btas2m5nstf42" path="res://resources/sounds/playing_music_good.mp3" id="2_0sr5j"]
 
 [node name="Main" type="Node2D"]

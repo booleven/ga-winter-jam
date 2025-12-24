@@ -135,6 +135,7 @@ texture = ExtResource("7_mxkie")
 metadata/_edit_lock_ = true
 
 [node name="SlotGrid" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(-10, 89)
 texture = ExtResource("8_v37ui")
 metadata/_edit_lock_ = true
