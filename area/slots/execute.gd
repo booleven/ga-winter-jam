@@ -17,7 +17,7 @@ const PATTERNS = {
 }
 
 func enter() -> void:
-	print("poop")
+	print("penis")
 	if is_afx_spin:
 		check_three_in_a_row()
 		queue_afx()
