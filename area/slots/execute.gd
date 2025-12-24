@@ -8,7 +8,8 @@ var stack: Array[EffectEntity]
 # ===== STATE =====
 
 func enter() -> void:
-	if state_machine.spins_left == 0 or state_machine.frozen == [true, true, true]:
+	print("penis")
+	if is_afx_spin:
 		check_three_in_a_row()
 		queue_afx()
 	else:
