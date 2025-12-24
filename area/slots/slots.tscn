@@ -1,14 +1,6 @@
-[gd_scene load_steps=28 format=3 uid="uid://cq47c4rcow286"]
+[gd_scene load_steps=24 format=3 uid="uid://cq47c4rcow286"]
 
-[ext_resource type="Script" uid="uid://cxfm54eriuwgv" path="res://area/slots/slots.gd" id="1_63hsx"]
-[ext_resource type="Script" uid="uid://be8tdlaws8mdc" path="res://scripts/tile.gd" id="2_xc0nf"]
-[ext_resource type="Resource" uid="uid://c3prb5dquie05" path="res://resources/data/tiles/clubs.tres" id="3_mxkie"]
-[ext_resource type="Resource" uid="uid://durfc7kr4h720" path="res://resources/data/tiles/hearts.tres" id="4_5gn18"]
 [ext_resource type="Script" uid="uid://5lqmbbfg0ywq" path="res://area/slots/grid.gd" id="4_8wavt"]
-[ext_resource type="Script" uid="uid://bv5qd47xnuq1r" path="res://area/slots/calculator.gd" id="5_51noi"]
-[ext_resource type="Resource" uid="uid://doye73yijtkm3" path="res://resources/data/tiles/spades.tres" id="5_331ki"]
-[ext_resource type="Resource" uid="uid://co8b54ewx3dw8" path="res://resources/data/tiles/diamonds.tres" id="6_58lkm"]
-[ext_resource type="Material" uid="uid://bmv3x3qqnsqmr" path="res://area/slots/freeze.tres" id="7_hg167"]
 [ext_resource type="Texture2D" uid="uid://7d2wb1b1v0fc" path="res://resources/assets/slot/slot_machine.png" id="7_mxkie"]
 [ext_resource type="Texture2D" uid="uid://d3xfrnwd55810" path="res://resources/assets/slot/background.png" id="8_3q2qy"]
 [ext_resource type="Texture2D" uid="uid://bfn74bl6lpbk1" path="res://resources/assets/slot/slot_grid.png" id="8_v37ui"]
@@ -22,6 +14,10 @@
 [ext_resource type="Texture2D" uid="uid://ba3x81lyvt8ns" path="res://resources/assets/slot/freeze_middle.png" id="17_hg167"]
 [ext_resource type="Texture2D" uid="uid://dvten5ft4mdw0" path="res://resources/assets/slot/freeze_right.png" id="18_75l62"]
 [ext_resource type="Shader" uid="uid://bc0ku5feafpuy" path="res://resources/shaders/led.gdshader" id="20_2et7l"]
+[ext_resource type="Script" uid="uid://c5wsux1x415fq" path="res://area/slots/state_machine.gd" id="23_kfsju"]
+[ext_resource type="Script" uid="uid://ls7pcdk2khk2" path="res://area/slots/idle.gd" id="24_o3snp"]
+[ext_resource type="Script" uid="uid://b7l048bugqhnn" path="res://area/slots/spin.gd" id="25_o3snp"]
+[ext_resource type="Script" uid="uid://8k7pdclat4gy" path="res://area/slots/execute.gd" id="26_fkfjl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ha2tw"]
 shader = ExtResource("20_2et7l")
@@ -57,15 +53,29 @@ radius = 136.00368
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0rqpl"]
 shader = ExtResource("15_75l62")
 shader_parameter/distortion_strength = 2.0
-shader_parameter/curvature = 2.0000000475
+shader_parameter/curvature = 1.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_mxkie"]
 font_size = 100
 
 [node name="Slots" type="Node2D"]
-script = ExtResource("1_63hsx")
-total_tiles = Array[ExtResource("2_xc0nf")]([ExtResource("3_mxkie"), ExtResource("3_mxkie"), ExtResource("3_mxkie"), ExtResource("3_mxkie"), ExtResource("4_5gn18"), ExtResource("4_5gn18"), ExtResource("4_5gn18"), ExtResource("4_5gn18"), ExtResource("5_331ki"), ExtResource("5_331ki"), ExtResource("5_331ki"), ExtResource("5_331ki"), ExtResource("6_58lkm"), ExtResource("6_58lkm"), ExtResource("6_58lkm"), ExtResource("6_58lkm")])
-freeze_material = ExtResource("7_hg167")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+script = ExtResource("23_kfsju")
+current_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://buoxee4ryc121"
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("24_o3snp")
+metadata/_custom_type_script = "uid://s3q1mykales"
+
+[node name="Spin" type="Node" parent="StateMachine"]
+script = ExtResource("25_o3snp")
+metadata/_custom_type_script = "uid://s3q1mykales"
+
+[node name="Execute" type="Node" parent="StateMachine"]
+script = ExtResource("26_fkfjl")
+metadata/_custom_type_script = "uid://s3q1mykales"
 
 [node name="Background" type="Sprite2D" parent="."]
 texture = ExtResource("8_3q2qy")
@@ -122,10 +132,12 @@ metadata/_custom_type_script = "uid://ce2qpf48t48tx"
 [node name="SlotMachine" type="Sprite2D" parent="."]
 position = Vector2(10, 52)
 texture = ExtResource("7_mxkie")
+metadata/_edit_lock_ = true
 
 [node name="SlotGrid" type="Sprite2D" parent="."]
 position = Vector2(-10, 89)
 texture = ExtResource("8_v37ui")
+metadata/_edit_lock_ = true
 
 [node name="LeverShaft" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_xpi8b")
@@ -151,10 +163,6 @@ script = ExtResource("4_8wavt")
 spacing = Vector2(250, 200)
 scaling = 0.7
 barrel = SubResource("ShaderMaterial_0rqpl")
-
-[node name="Calculator" type="Node" parent="."]
-script = ExtResource("5_51noi")
-timer = 0.7
 
 [node name="FreezeButtons" type="Node2D" parent="."]
 position = Vector2(11, 52)
@@ -188,11 +196,22 @@ offset_left = -609.0
 offset_top = -85.0
 offset_right = -495.0
 offset_bottom = 56.0
-text = "3"
+text = "5"
 label_settings = SubResource("LabelSettings_mxkie")
 metadata/_edit_use_anchors_ = true
 
+[node name="Label" type="Label" parent="."]
+offset_left = -907.0
+offset_top = -489.0
+offset_right = -479.0
+offset_bottom = -420.0
+theme_override_font_sizes/font_size = 50
+text = "current state"
+
+[connection signal="finished" from="StateMachine/Idle" to="StateMachine" method="_on_idle_finished"]
+[connection signal="finished" from="StateMachine/Execute" to="StateMachine" method="_on_execute_finished"]
 [connection signal="pulled" from="Lever" to="." method="_on_lever_pulled"]
-[connection signal="pressed" from="FreezeButtons/Freeze1" to="." method="_on_freeze_1_pressed"]
-[connection signal="pressed" from="FreezeButtons/Freeze2" to="." method="_on_freeze_2_pressed"]
-[connection signal="pressed" from="FreezeButtons/Freeze3" to="." method="_on_freeze_3_pressed"]
+[connection signal="pulled" from="Lever" to="StateMachine/Idle" method="_on_lever_pulled"]
+[connection signal="pressed" from="FreezeButtons/Freeze1" to="StateMachine/Idle" method="_on_freeze_1_pressed"]
+[connection signal="pressed" from="FreezeButtons/Freeze2" to="StateMachine/Idle" method="_on_freeze_2_pressed"]
+[connection signal="pressed" from="FreezeButtons/Freeze3" to="StateMachine/Idle" method="_on_freeze_3_pressed"]

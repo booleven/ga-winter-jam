@@ -1,21 +1,15 @@
-[gd_scene load_steps=13 format=3 uid="uid://cjon5h6roosix"]
+[gd_scene load_steps=8 format=3 uid="uid://cjon5h6roosix"]
 
 [ext_resource type="Script" uid="uid://r2ejew3lwndl" path="res://area/shop/shop.gd" id="1_uwyyb"]
 [ext_resource type="Texture2D" uid="uid://3n8k42u7ojmn" path="res://resources/assets/shop/background.png" id="1_yhtqs"]
-[ext_resource type="Script" uid="uid://be8tdlaws8mdc" path="res://scripts/tile.gd" id="2_n4po3"]
 [ext_resource type="Texture2D" uid="uid://gdsqb5fxiq0m" path="res://resources/assets/shop/zipper.png" id="3_2g6jd"]
-[ext_resource type="Resource" uid="uid://durfc7kr4h720" path="res://resources/data/tiles/hearts.tres" id="3_5ndol"]
 [ext_resource type="Texture2D" uid="uid://d4c4ug8s65ixt" path="res://resources/assets/shop/topdown_machine.png" id="4_fmp5l"]
-[ext_resource type="Resource" uid="uid://co8b54ewx3dw8" path="res://resources/data/tiles/diamonds.tres" id="4_mx551"]
 [ext_resource type="Texture2D" uid="uid://beuhv5pc5kdsu" path="res://resources/assets/shop/duffel_open.png" id="5_5ndol"]
-[ext_resource type="Resource" uid="uid://c3prb5dquie05" path="res://resources/data/tiles/clubs.tres" id="5_jo5wf"]
 [ext_resource type="Texture2D" uid="uid://ctejey16aulrt" path="res://resources/assets/shop/wrench.png" id="5_n4po3"]
-[ext_resource type="Resource" uid="uid://doye73yijtkm3" path="res://resources/data/tiles/spades.tres" id="6_lqxch"]
 [ext_resource type="Script" uid="uid://c2fiy2tp7cim4" path="res://area/shop/points_counter.gd" id="7_2g6jd"]
 
 [node name="Shop" type="Node2D"]
 script = ExtResource("1_uwyyb")
-potential_tiles = Array[ExtResource("2_n4po3")]([ExtResource("3_5ndol"), ExtResource("4_mx551"), ExtResource("5_jo5wf"), ExtResource("6_lqxch")])
 
 [node name="Background" type="Sprite2D" parent="."]
 texture = ExtResource("1_yhtqs")

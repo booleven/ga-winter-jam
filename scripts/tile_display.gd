@@ -1,5 +1,4 @@
-extends Node2D
-class_name TileDisplay
+class_name TileDisplay extends Node2D
 
 var sprite: Sprite2D
 var time: int = 0

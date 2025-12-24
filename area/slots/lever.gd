@@ -53,4 +53,3 @@ func check_activation():
 	if pull_percent >= activation_threshold and not is_triggered:
 		is_triggered = true
 		pulled.emit()
-		print("Lever Pulled!")

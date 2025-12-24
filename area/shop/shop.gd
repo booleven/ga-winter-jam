@@ -5,8 +5,8 @@ var outline_material: ShaderMaterial
 
 var reroll_cost: int = 150
 
-@export var potential_tiles: Array[Tile] = []
-var current_tiles: Array[Tile] = []
+var potential_tiles: Array[TileEntity] = []
+var current_tiles: Array[TileEntity] = []
 
 func _init() -> void:
 	outline_material = ShaderMaterial.new()
@@ -36,7 +36,7 @@ func reroll():
 	
 	#5 tiles in shop!
 	for i in range(5):
-		var random_tile = potential_tiles.pick_random() as Tile
+		var random_tile = potential_tiles.pick_random() as TileEntity
 		current_tiles.append(random_tile)
 		
 		var s = TileDisplay.new()
