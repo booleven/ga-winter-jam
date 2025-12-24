@@ -1,5 +1,18 @@
 extends State
 
+#enter does not seem to be called when we start very first time
+func enter() -> void:
+	$"../../FreezeButtons/Freeze1".disabled = false
+	$"../../FreezeButtons/Freeze2".disabled = false
+	$"../../FreezeButtons/Freeze3".disabled = false
+	$"../../Lever/CollisionShape2D".disabled = false
+
+func exit() -> void:
+	$"../../FreezeButtons/Freeze1".disabled = true
+	$"../../FreezeButtons/Freeze2".disabled = true
+	$"../../FreezeButtons/Freeze3".disabled = true
+	$"../../Lever/CollisionShape2D".disabled = true
+
 func _on_freeze_1_pressed() -> void:
 	state_machine.frozen[0] = !state_machine.frozen[0]
 
