@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3uw1nsf5iuha"]
+
+[ext_resource type="Script" uid="uid://bmb7ii5o2qmhl" path="res://scenes/main/main.gd" id="1_mahr4"]
+[ext_resource type="AudioStream" uid="uid://btas2m5nstf42" path="res://assets/sounds/playing_music_good.mp3" id="2_0sr5j"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_mahr4")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_0sr5j")
+autoplay = true

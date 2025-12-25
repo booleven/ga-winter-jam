@@ -16,7 +16,7 @@ config/features=PackedStringArray("4.5", "GL Compatibility")
 
 [autoload]
 
-global="*res://global.gd"
+global="*res://scripts/util/global.gd"
 
 [display]
 
@@ -29,6 +29,15 @@ window/stretch/aspect="ignore"
 
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
+
+[file_customization]
+
+folder_colors={
+"res://addons/": "gray",
+"res://assets/": "pink",
+"res://scenes/": "blue",
+"res://scripts/": "green"
+}
 
 [rendering]
 
