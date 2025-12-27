@@ -23,6 +23,3 @@ func _init() -> void:
 	wheel_zero.shuffle()
 	wheel_one.shuffle()
 	wheel_two.shuffle()
-
-signal go_shop
-signal go_slots

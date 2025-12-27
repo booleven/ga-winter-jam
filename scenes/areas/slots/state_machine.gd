@@ -4,6 +4,8 @@ var frozen := [false, false, false]
 var current_tiles: Array[TileEntity] = []
 var spins_left := 5
 
+signal finished()
+
 func _ready() -> void:
 	current_tiles.resize(9)
 
@@ -26,4 +28,7 @@ func _on_idle_finished(state: State) -> void:
 	transition_to($Execute)
 
 func _on_execute_finished(state: State) -> void:
-	transition_to($Idle)
+	if frozen == [true, true, true] or spins_left == 0:
+		finished.emit()
+	else:
+		transition_to($Idle)

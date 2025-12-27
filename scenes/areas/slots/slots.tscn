@@ -1,6 +1,7 @@
-[gd_scene load_steps=24 format=3 uid="uid://cq47c4rcow286"]
+[gd_scene load_steps=25 format=3 uid="uid://cq47c4rcow286"]
 
 [ext_resource type="Script" uid="uid://5lqmbbfg0ywq" path="res://scenes/areas/slots/grid.gd" id="4_8wavt"]
+[ext_resource type="Script" uid="uid://s3q1mykales" path="res://scripts/classes/state.gd" id="5_c7st3"]
 [ext_resource type="Texture2D" uid="uid://7d2wb1b1v0fc" path="res://assets/art/slot/slot_machine.png" id="7_mxkie"]
 [ext_resource type="Texture2D" uid="uid://d3xfrnwd55810" path="res://assets/art/slot/background.png" id="8_3q2qy"]
 [ext_resource type="Texture2D" uid="uid://bfn74bl6lpbk1" path="res://assets/art/slot/slot_grid.png" id="8_v37ui"]
@@ -75,6 +76,10 @@ metadata/_custom_type_script = "uid://s3q1mykales"
 
 [node name="Execute" type="Node" parent="StateMachine"]
 script = ExtResource("26_fkfjl")
+metadata/_custom_type_script = "uid://s3q1mykales"
+
+[node name="Done" type="Node" parent="StateMachine"]
+script = ExtResource("5_c7st3")
 metadata/_custom_type_script = "uid://s3q1mykales"
 
 [node name="Background" type="Sprite2D" parent="."]

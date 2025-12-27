@@ -11,6 +11,14 @@
 [node name="Main" type="Node2D"]
 script = ExtResource("1_mahr4")
 
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_0sr5j")
+autoplay = true
+
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("3_6q06x")
 current_state = NodePath("Slot")
@@ -25,13 +33,3 @@ metadata/_custom_type_script = "uid://s3q1mykales"
 script = ExtResource("6_ow5a4")
 area = ExtResource("7_hujxm")
 metadata/_custom_type_script = "uid://s3q1mykales"
-
-[node name="Node2D" type="Node2D" parent="."]
-
-[node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_0sr5j")
-autoplay = true
-
-[connection signal="finished" from="StateMachine/Slot" to="StateMachine" method="_on_slot_finished"]

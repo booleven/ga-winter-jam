@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cjon5h6roosix"]
+[gd_scene load_steps=9 format=3 uid="uid://cjon5h6roosix"]
 
-[ext_resource type="Script" uid="uid://r2ejew3lwndl" path="res://scenes/areas/shop/shop.gd" id="1_uwyyb"]
+[ext_resource type="Script" uid="uid://c6adq3pkioxc0" path="res://scenes/areas/shop/state_machine.gd" id="1_rsxqd"]
 [ext_resource type="Texture2D" uid="uid://3n8k42u7ojmn" path="res://assets/art/shop/background.png" id="1_yhtqs"]
+[ext_resource type="Script" uid="uid://b0brir2bb55om" path="res://scenes/areas/shop/state.gd" id="2_whe22"]
 [ext_resource type="Texture2D" uid="uid://gdsqb5fxiq0m" path="res://assets/art/shop/zipper.png" id="3_2g6jd"]
 [ext_resource type="Texture2D" uid="uid://d4c4ug8s65ixt" path="res://assets/art/shop/topdown_machine.png" id="4_fmp5l"]
 [ext_resource type="Texture2D" uid="uid://beuhv5pc5kdsu" path="res://assets/art/shop/duffel_open.png" id="5_5ndol"]
@@ -9,7 +10,15 @@
 [ext_resource type="Script" uid="uid://c2fiy2tp7cim4" path="res://scenes/areas/shop/points_counter.gd" id="7_2g6jd"]
 
 [node name="Shop" type="Node2D"]
-script = ExtResource("1_uwyyb")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+script = ExtResource("1_rsxqd")
+current_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://buoxee4ryc121"
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("2_whe22")
+metadata/_custom_type_script = "uid://s3q1mykales"
 
 [node name="Background" type="Sprite2D" parent="."]
 texture = ExtResource("1_yhtqs")

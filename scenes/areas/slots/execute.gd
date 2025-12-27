@@ -1,26 +1,30 @@
 extends State
+
 @export var timer := 0.75
-@export var is_afx_spin := true  #dev spin type stuff
 var points := 0
-var row_value := 100
+var row_value := 100 #3iar base amount
 var stack: Array[EffectEntity]
 
 # ===== STATE =====
 
 func enter() -> void:
 	if state_machine.frozen == [true, true, true] or state_machine.spins_left == 0:
-		check_three_in_a_row()
+		queue_3iar()
 		queue_afx()
 	else:
 		queue_pfx()
 	
+	sort_stack()
 	await execute_stack()
 	
-	#postexecute here!
+	#animations abt scoring done
+	
+	
 	finished.emit(self)
 
 # ===== HELPERS =====
 
+#this could be an enum instead, but this should be ok
 const PATTERNS = {
 	"col_left": [0, 1, 2],
 	"col_middle": [3, 4, 5],
@@ -32,7 +36,7 @@ const PATTERNS = {
 	"diagonal_neg": [2, 4, 6]
 }
 
-func check_three_in_a_row() -> void:
+func queue_3iar() -> void:
 	var tiles := state_machine.current_tiles as Array[TileEntity]
 	
 	#first 8 patterns always the 3iar
@@ -60,8 +64,6 @@ func queue_pfx() -> void:
 		for effect_resource in tile.pfx:
 			var ee := EffectEntity.new(effect_resource, tile_index)
 			stack.append(ee)
-	
-	sort_stack()
 
 #queue active effect entities
 func queue_afx() -> void:
@@ -72,15 +74,6 @@ func queue_afx() -> void:
 		for effect_resource in tile.afx:
 			var ee := EffectEntity.new(effect_resource, tile_index)
 			stack.append(ee)
-	
-	sort_stack()
-
-func execute_stack() -> void:
-	while stack.size() > 0:
-		await get_tree().create_timer(timer).timeout
-		var ee := stack.pop_front() as EffectEntity
-		print(stack)
-		execute(ee)
 
 #checks if a single tile entity is in a pattern
 func check_pattern(tiles: Array[TileEntity], pattern: Array, tile: TileEntity) -> bool:
@@ -102,7 +95,7 @@ func execute(ee: EffectEntity) -> void:
 	if ee.method.is_empty():
 		return
 	if not has_method(ee.method):
-		push_error("Invalid effect method: %s" % ee.method)
+		push_error("effect has nonexistant method: %s" % ee.method)
 		return
 	
 	#animate tile
@@ -118,7 +111,16 @@ func execute(ee: EffectEntity) -> void:
 	if counter:
 		counter.text = str(points)
 
+func execute_stack() -> void:
+	while stack.size() > 0:
+		var ee := stack.pop_front() as EffectEntity
+		print(stack)
+		execute(ee)
+		await get_tree().create_timer(timer).timeout
+
 # ===== ACTUAL EFFECT METHODS =====
+
+#we could make an enum here for every method name, might be long tho
 
 func add_points(args: Array) -> void:
 	var amount: int = args[0]
@@ -132,3 +134,4 @@ func copy(args: Array) -> void:
 		var ee := EffectEntity.new(effect_resource, index)
 		await get_tree().create_timer(0.3).timeout
 		execute(ee)
+	
