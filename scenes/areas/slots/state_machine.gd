@@ -15,14 +15,25 @@ func _process(delta: float) -> void:
 func update_current_tiles():
 	var grid := get_node("../Grid")
 	
-	for i in range(9):
-		var tile_display: TileDisplay = grid.tiles[i]
-		var tile := current_tiles[i]
-		
-		if tile == null:
-			tile_display.sprite.texture = null
-		else:
-			tile_display.sprite.texture = tile.texture
+	for child in grid.get_children():
+		child.queue_free()
+	
+	#hardcoded
+	var spacing: Vector2 = Vector2(250, 200)
+	var scaling = 0.85
+	var index = 0
+	for x in range(3): #col
+		for y in range(3): #row
+			var s = TileDisplay.new(current_tiles[index])
+			grid.add_child(s)
+			
+			s.name = str(index)
+			s.position = Vector2(x * spacing.x, y * spacing.y)
+			print(s.tooltip_trigger.position)
+			s.scale.x = scaling
+			s.scale.y = scaling
+			
+			index += 1
 
 func _on_idle_finished(state: State) -> void:
 	transition_to($Execute)

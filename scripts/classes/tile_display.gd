@@ -1,14 +1,25 @@
 class_name TileDisplay extends Node2D
 
 var sprite: Sprite2D
-var time: int = 0
-
+var tile_entity: TileEntity
+var tooltip_trigger: TooltipTrigger
 var outline_shader: Shader = preload("res://assets/shaders/outline.gdshader")
 var score_material: ShaderMaterial
 
-func _init() -> void:
+func _init(tile: TileEntity) -> void:
+	tile_entity = tile
+	
+	#sprite stuff
 	sprite = Sprite2D.new()
+	sprite.texture = tile_entity.texture
 	add_child(sprite)
+	
+	#tooltip triggering stuff
+	var texture_size = tile_entity.texture.get_size()
+	tooltip_trigger = TooltipTrigger.new(texture_size, tile_entity)
+	add_child(tooltip_trigger)
+	
+	#temporary i guess
 	score_material = ShaderMaterial.new()
 	score_material.shader = outline_shader
 	score_material.set_shader_parameter("width", 10.0)

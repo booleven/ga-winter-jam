@@ -1,6 +1,5 @@
 extends State
 
-#enter does not seem to be called when we start very first time
 func enter() -> void:
 	$"../../FreezeButtons/Freeze1".disabled = false
 	$"../../FreezeButtons/Freeze2".disabled = false
@@ -35,11 +34,11 @@ func _on_lever_pulled() -> void:
 		if not state_machine.frozen[col]:
 			spin_wheel(col)
 	
-	#hacky?
 	state_machine.update_current_tiles()
 	
-	#if state_machine.spins == 0 or state_machine.frozen == [true, true, true]:
-	#	finished.emit(self) #needs a reason variable in here?
+	#TODO: fixes a race condition??? i can't locate it??? pls do later???
+	await get_tree().create_timer(0.01).timeout
+	
 	finished.emit(self)
 
 func spin_wheel(col: int) -> void:

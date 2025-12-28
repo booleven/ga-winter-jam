@@ -7,9 +7,11 @@ var pfx: Array[EffectResource]
 var afx: Array[EffectResource]
 
 func _init(tr: TileResource = null) -> void:
-	if tr:
-		self.name = tr.name
-		self.texture = tr.texture
-		self.cost = tr.cost
-		self.pfx = tr.pfx.duplicate()
-		self.afx = tr.afx.duplicate()
+	if not tr:
+		return
+	
+	self.name = tr.name
+	self.texture = tr.texture
+	self.cost = tr.cost
+	self.pfx = tr.pfx.duplicate()
+	self.afx = tr.afx.duplicate()

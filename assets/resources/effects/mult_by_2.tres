@@ -4,5 +4,7 @@
 
 [resource]
 script = ExtResource("1_78iif")
-method = "mult"
+description = "multiply the score by 2 fart poop"
+method = "mult_points"
+args = [2]
 metadata/_custom_type_script = "uid://h3eufeoi3ceq"

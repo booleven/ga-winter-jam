@@ -13,6 +13,9 @@ enum ShapeType { RECTANGLE, CIRCLE, CAPSULE }
 		color = value
 		queue_redraw()
 
+func _init() -> void:
+	mouse_filter = Control.MOUSE_FILTER_IGNORE #whacky ass fix for collisions
+
 func _draw() -> void:
 	var rect = Rect2(Vector2.ZERO, size)
 	

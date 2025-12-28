@@ -100,11 +100,10 @@ func execute(ee: EffectEntity) -> void:
 	
 	#animate tile
 	var grid := get_node("../../Grid")
-	if grid and ee.tile_index < grid.tiles.size():
-		grid.tiles[ee.tile_index].animate("score")
+	grid.get_child(ee.tile_index).animate("score")
 	
 	#actual execution here
-	call(ee.method, ee.args)
+	callv(ee.method, ee.args)
 	
 	#counter
 	var counter := get_node("../../PointsCounter")
@@ -122,16 +121,8 @@ func execute_stack() -> void:
 
 #we could make an enum here for every method name, might be long tho
 
-func add_points(args: Array) -> void:
-	var amount: int = args[0]
-	points += amount
+func add_points(amt: int) -> void:
+	points += amt
 
-func copy(args: Array) -> void:
-	var index: int = args[0]
-	var tiles := state_machine.current_tiles as Array[TileEntity]
-	
-	for effect_resource in tiles[index].afx:
-		var ee := EffectEntity.new(effect_resource, index)
-		await get_tree().create_timer(0.3).timeout
-		execute(ee)
-	
+func mult_points(amt: float) -> void:
+	points = int(points * amt)

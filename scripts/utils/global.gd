@@ -1,12 +1,21 @@
 extends Node #globals scripts aren't the best, may rework this entire global
 
+#be picky about what actually NEEDS to be global
 var level: int = 0
 var money: int = 1000
 var wheel_zero: Array[TileEntity]
 var wheel_one: Array[TileEntity]
 var wheel_two: Array[TileEntity]
 
-#hardcoded
+enum RARITY {
+	COMMON,
+	UNCOMMON,
+	RARE,
+	EPIC,
+	JACKPOT
+}
+
+#hardcoded, change way in the future
 var initial_tile_resources: Array[TileResource] = [
 	preload("res://assets/resources/tiles/clubs.tres"),
 	preload("res://assets/resources/tiles/diamonds.tres"),

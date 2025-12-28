@@ -1,6 +1,5 @@
-[gd_scene load_steps=25 format=3 uid="uid://cq47c4rcow286"]
+[gd_scene load_steps=22 format=3 uid="uid://cq47c4rcow286"]
 
-[ext_resource type="Script" uid="uid://5lqmbbfg0ywq" path="res://scenes/areas/slots/grid.gd" id="4_8wavt"]
 [ext_resource type="Script" uid="uid://s3q1mykales" path="res://scripts/classes/state.gd" id="5_c7st3"]
 [ext_resource type="Texture2D" uid="uid://7d2wb1b1v0fc" path="res://assets/art/slot/slot_machine.png" id="7_mxkie"]
 [ext_resource type="Texture2D" uid="uid://d3xfrnwd55810" path="res://assets/art/slot/background.png" id="8_3q2qy"]
@@ -10,7 +9,6 @@
 [ext_resource type="Shader" uid="uid://dc1iecysx73tm" path="res://assets/shaders/clip.gdshader" id="9_xpi8b"]
 [ext_resource type="Script" uid="uid://4jnese2il8fy" path="res://scenes/areas/slots/lever.gd" id="10_xus7s"]
 [ext_resource type="Texture2D" uid="uid://lnjcd8sclpku" path="res://assets/art/slot/lever_handle.png" id="11_hg167"]
-[ext_resource type="Shader" uid="uid://cspqy8k7toorr" path="res://assets/shaders/barrel.gdshader" id="15_75l62"]
 [ext_resource type="Texture2D" uid="uid://bsn2oyd7vflfi" path="res://assets/art/slot/freeze_left.png" id="16_xus7s"]
 [ext_resource type="Texture2D" uid="uid://ba3x81lyvt8ns" path="res://assets/art/slot/freeze_middle.png" id="17_hg167"]
 [ext_resource type="Texture2D" uid="uid://dvten5ft4mdw0" path="res://assets/art/slot/freeze_right.png" id="18_75l62"]
@@ -50,11 +48,6 @@ shader_parameter/right_clip = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_75l62"]
 radius = 136.00368
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0rqpl"]
-shader = ExtResource("15_75l62")
-shader_parameter/distortion_strength = 2.0
-shader_parameter/curvature = 1.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_mxkie"]
 font_size = 100
@@ -163,13 +156,6 @@ shape = SubResource("CircleShape2D_75l62")
 [node name="LeverHandle" type="Sprite2D" parent="Lever"]
 texture = ExtResource("11_hg167")
 
-[node name="Grid" type="CanvasGroup" parent="."]
-position = Vector2(-249, -126)
-script = ExtResource("4_8wavt")
-spacing = Vector2(250, 200)
-scaling = 0.7
-barrel = SubResource("ShaderMaterial_0rqpl")
-
 [node name="FreezeButtons" type="Node2D" parent="."]
 position = Vector2(11, 52)
 
@@ -213,6 +199,9 @@ offset_right = -479.0
 offset_bottom = -420.0
 theme_override_font_sizes/font_size = 50
 text = "current state"
+
+[node name="Grid" type="CanvasGroup" parent="."]
+position = Vector2(-249, -126)
 
 [connection signal="finished" from="StateMachine/Idle" to="StateMachine" method="_on_idle_finished"]
 [connection signal="finished" from="StateMachine/Execute" to="StateMachine" method="_on_execute_finished"]
