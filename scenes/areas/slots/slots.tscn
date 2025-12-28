@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cq47c4rcow286"]
+[gd_scene load_steps=25 format=3 uid="uid://cq47c4rcow286"]
 
 [ext_resource type="Script" uid="uid://s3q1mykales" path="res://scripts/classes/state.gd" id="5_c7st3"]
 [ext_resource type="Texture2D" uid="uid://7d2wb1b1v0fc" path="res://assets/art/slot/slot_machine.png" id="7_mxkie"]
@@ -9,10 +9,13 @@
 [ext_resource type="Shader" uid="uid://dc1iecysx73tm" path="res://assets/shaders/clip.gdshader" id="9_xpi8b"]
 [ext_resource type="Script" uid="uid://4jnese2il8fy" path="res://scenes/areas/slots/lever.gd" id="10_xus7s"]
 [ext_resource type="Texture2D" uid="uid://lnjcd8sclpku" path="res://assets/art/slot/lever_handle.png" id="11_hg167"]
+[ext_resource type="Texture2D" uid="uid://br4gmurle145" path="res://assets/art/slot/freeze_left_on.png" id="16_aalxr"]
 [ext_resource type="Texture2D" uid="uid://bsn2oyd7vflfi" path="res://assets/art/slot/freeze_left.png" id="16_xus7s"]
 [ext_resource type="Texture2D" uid="uid://ba3x81lyvt8ns" path="res://assets/art/slot/freeze_middle.png" id="17_hg167"]
+[ext_resource type="Texture2D" uid="uid://b2xe7lohcheu5" path="res://assets/art/slot/freeze_middle_on.png" id="18_2i57l"]
 [ext_resource type="Texture2D" uid="uid://dvten5ft4mdw0" path="res://assets/art/slot/freeze_right.png" id="18_75l62"]
 [ext_resource type="Shader" uid="uid://bc0ku5feafpuy" path="res://assets/shaders/led.gdshader" id="20_2et7l"]
+[ext_resource type="Texture2D" uid="uid://r1yhiwxop5p3" path="res://assets/art/slot/freeze_right_on.png" id="20_ytbtu"]
 [ext_resource type="Script" uid="uid://c5wsux1x415fq" path="res://scenes/areas/slots/state_machine.gd" id="23_kfsju"]
 [ext_resource type="Script" uid="uid://ls7pcdk2khk2" path="res://scenes/areas/slots/idle.gd" id="24_o3snp"]
 [ext_resource type="Script" uid="uid://b7l048bugqhnn" path="res://scenes/areas/slots/spin.gd" id="25_o3snp"]
@@ -93,6 +96,7 @@ offset_bottom = 249.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 4
+mouse_filter = 2
 script = ExtResource("9_0rqpl")
 shape = 1
 color = Color(0.18039216, 0.28627452, 0.3764706, 1)
@@ -123,6 +127,7 @@ offset_bottom = 213.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 4
+mouse_filter = 2
 script = ExtResource("9_0rqpl")
 shape = 1
 metadata/_custom_type_script = "uid://ce2qpf48t48tx"
@@ -159,28 +164,34 @@ texture = ExtResource("11_hg167")
 [node name="FreezeButtons" type="Node2D" parent="."]
 position = Vector2(11, 52)
 
-[node name="Freeze1" type="TextureButton" parent="FreezeButtons"]
+[node name="Freeze0" type="TextureButton" parent="FreezeButtons"]
 offset_left = -313.0
 offset_top = 354.0
 offset_right = -163.0
 offset_bottom = 454.0
+toggle_mode = true
 texture_normal = ExtResource("16_xus7s")
+texture_pressed = ExtResource("16_aalxr")
 metadata/_edit_use_anchors_ = true
 
-[node name="Freeze2" type="TextureButton" parent="FreezeButtons"]
+[node name="Freeze1" type="TextureButton" parent="FreezeButtons"]
 offset_left = -80.0
 offset_top = 362.0
 offset_right = 70.0
 offset_bottom = 462.0
+toggle_mode = true
 texture_normal = ExtResource("17_hg167")
+texture_pressed = ExtResource("18_2i57l")
 metadata/_edit_use_anchors_ = true
 
-[node name="Freeze3" type="TextureButton" parent="FreezeButtons"]
+[node name="Freeze2" type="TextureButton" parent="FreezeButtons"]
 offset_left = 147.0
 offset_top = 356.0
 offset_right = 297.0
 offset_bottom = 456.0
+toggle_mode = true
 texture_normal = ExtResource("18_75l62")
+texture_pressed = ExtResource("20_ytbtu")
 metadata/_edit_use_anchors_ = true
 
 [node name="SpinsCounter" type="Label" parent="."]
@@ -207,6 +218,6 @@ position = Vector2(-249, -126)
 [connection signal="finished" from="StateMachine/Execute" to="StateMachine" method="_on_execute_finished"]
 [connection signal="pulled" from="Lever" to="." method="_on_lever_pulled"]
 [connection signal="pulled" from="Lever" to="StateMachine/Idle" method="_on_lever_pulled"]
-[connection signal="pressed" from="FreezeButtons/Freeze1" to="StateMachine/Idle" method="_on_freeze_1_pressed"]
-[connection signal="pressed" from="FreezeButtons/Freeze2" to="StateMachine/Idle" method="_on_freeze_2_pressed"]
-[connection signal="pressed" from="FreezeButtons/Freeze3" to="StateMachine/Idle" method="_on_freeze_3_pressed"]
+[connection signal="toggled" from="FreezeButtons/Freeze0" to="StateMachine/Idle" method="_on_freeze_0_toggled"]
+[connection signal="toggled" from="FreezeButtons/Freeze1" to="StateMachine/Idle" method="_on_freeze_1_toggled"]
+[connection signal="toggled" from="FreezeButtons/Freeze2" to="StateMachine/Idle" method="_on_freeze_2_toggled"]

@@ -8,17 +8,17 @@ var stack: Array[EffectEntity]
 # ===== STATE =====
 
 func enter() -> void:
+	await get_tree().process_frame #fixes first tile not animating
 	if state_machine.frozen == [true, true, true] or state_machine.spins_left == 0:
 		queue_3iar()
 		queue_afx()
 	else:
 		queue_pfx()
 	
-	sort_stack()
+	sort_stack() #urgency
 	await execute_stack()
 	
-	#animations abt scoring done
-	
+	#animations here?
 	
 	finished.emit(self)
 

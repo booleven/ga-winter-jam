@@ -4,7 +4,7 @@ var frozen := [false, false, false]
 var current_tiles: Array[TileEntity] = []
 var spins_left := 5
 
-signal finished()
+signal finished() #so this tells main's state that it is finished
 
 func _ready() -> void:
 	current_tiles.resize(9)
@@ -13,6 +13,7 @@ func _process(delta: float) -> void:
 	$"../Label".text = current_state.name
 
 func update_current_tiles():
+	
 	var grid := get_node("../Grid")
 	
 	for child in grid.get_children():

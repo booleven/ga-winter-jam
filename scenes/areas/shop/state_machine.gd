@@ -23,5 +23,5 @@ func update_tile_buys():
 		grid.add_child(display)
 		
 		display.name = str(i)
-		display.position = Vector2(100 * i, -75 * i)
+		display.position = Vector2(60 * i, -100 * i)
 		display.scale = Vector2.ONE * scaling

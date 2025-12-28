@@ -60,7 +60,7 @@ horizontal_alignment = 1
 script = ExtResource("7_2g6jd")
 
 [node name="TileBuys" type="CanvasGroup" parent="."]
-position = Vector2(-687, 256)
+position = Vector2(-663, 192)
 
 [connection signal="mouse_entered" from="Zipper" to="." method="_on_zipper_mouse_entered"]
 [connection signal="mouse_exited" from="Zipper" to="." method="_on_zipper_mouse_exited"]

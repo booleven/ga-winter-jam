@@ -1,8 +1,7 @@
 class_name TileDisplayTooltip extends VBoxContainer
 
 func _init(tile: TileEntity) -> void:
-	if not tile:
-		return
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
 	#spacing
 	add_theme_constant_override("separation", 4)
@@ -46,7 +45,11 @@ func _add_info_box(text: String) -> void:
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	
-	label.add_theme_font_size_override("font_size", 18)
+	label.add_theme_font_size_override("font_size", 22)
+	
+	#fixes the flickering
+	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
 	#babies
 	panel.add_child(label)
